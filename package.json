@@ -4,8 +4,7 @@
   "private": false,
   "dependencies": {
       "express": "4.8.1",
-      "pomelo":"1.0.3",
-      "pomelo-logger": "0.1.5"
+      "pomelo-logger": "0.1.7"
   },
   "description": "pomelo connector for http/https",
   "main": "index.js",
