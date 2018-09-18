@@ -8,25 +8,47 @@ var query = {
 };
 
 var body = {
-    a:1,
-    b:2
+    a:'你好',
+    b:'pomelo web 服务'
 }
 
 var request = http.request({
     hostname: '127.0.0.1',
-    port: 3010,
-    path: '/connector.entryHandler.entry?'+querystring.stringify(query),
+    port: 8010,
+    // path: '/connector.entryHandler.entry?'+querystring.stringify(query),
+    path: '/webconnector.helloWeb.sayHello?'+querystring.stringify(query),
     method: 'POST',
     headers:{
         'Content-Length':JSON.stringify(body).length
     }
 },function( response ){
     response.on('data',function( data ){
-        console.log("response:",data.toString());
+        console.log("post response:",data.toString());
     });
 });
 request.on('error',function( error ){
-    console.log('error:',error);
+    console.log('post error:',error);
 });
 request.write( JSON.stringify(body) );
 request.end();
+
+
+var requestGet = http.request({
+    hostname: '127.0.0.1',
+    port: 8010,
+    // path: '/connector.entryHandler.entry?'+querystring.stringify(query),
+    path: '/webconnector.helloWeb.sayHello?'+querystring.stringify(query),
+    method: 'GET',
+    headers:{
+        'Content-Length':JSON.stringify(body).length
+    }
+},function( response ){
+    response.on('data',function( data ){
+        console.log("get response:",data.toString());
+    });
+});
+requestGet.on('error',function( error ){
+    console.log('get error:',error);
+});
+requestGet.write( JSON.stringify(body) );
+requestGet.end();
